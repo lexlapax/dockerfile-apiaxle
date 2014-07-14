@@ -7,7 +7,7 @@ MAINTAINER Lex Lapax <lexlapax@gmail.com>
 
 # Update the APT cache
 ENV DEBIAN_FRONTEND noninteractive
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
+#RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" >> /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get upgrade -y
 
@@ -16,10 +16,12 @@ RUN apt-get upgrade -y
 RUN dpkg-divert --local --rename --add /sbin/initctl
 RUN ln -sf /bin/true /sbin/initctl
 
+# Install and setup project dependencies
+RUN apt-get install -y curl lsb-release supervisor openssh-server python-software-properties build-essential libxml2-dev
+
 RUN add-apt-repository ppa:chris-lea/node.js -y
 RUN apt-get update
-# Install and setup project dependencies
-RUN apt-get install -y curl lsb-release supervisor openssh-server python-software-properties build-essential libxml2-dev redis-server nodejs
+RUN apt-get install -y redis-server nodejs 
 
 RUN mkdir -p /var/run/sshd
 
