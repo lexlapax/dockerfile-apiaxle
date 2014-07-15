@@ -17,11 +17,11 @@ RUN dpkg-divert --local --rename --add /sbin/initctl
 RUN ln -sf /bin/true /sbin/initctl
 
 # Install and setup project dependencies
-RUN apt-get install -y curl lsb-release supervisor openssh-server python-software-properties build-essential libxml2-dev
+RUN apt-get install -y curl lsb-release supervisor openssh-server python-software-properties build-essential libxml2-dev redis-server
 
 RUN add-apt-repository ppa:chris-lea/node.js -y
 RUN apt-get update
-RUN apt-get install -y redis-server nodejs 
+RUN apt-get install -y nodejs 
 
 RUN mkdir -p /var/run/sshd
 
