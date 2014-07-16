@@ -48,6 +48,7 @@ RUN echo "ulimit -n 4096" >> /etc/default/redis
 
 RUN npm install -g apiaxle-repl apiaxle-proxy apiaxle-api
 
+RUN echo 'root:baseimg' | chpasswd
 # Expose Protocol Buffers and HTTP interfaces
 EXPOSE 3000 6379 22
 
