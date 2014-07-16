@@ -53,4 +53,4 @@ RUN echo 'root:baseimg' | chpasswd
 EXPOSE 3000 6379 22
 
 #CMD ["apiaxle-proxy", "-f", "1", "-p", "3000", "-q"]
-CMD ["/usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord", "-n"]
