@@ -18,11 +18,11 @@ If running docker in an SELinux enabled system, logging into sshd will be denied
 
 If you are running in an SELINUX enabled system, one alternative is to run the container in an interactive shell and manually run supervisord (in daemon mode)
 
-```docker run -t -i --name apigateway lapax/apiaxle /bin/bash```
-
-and then
-
-```supervisord```
+```shell
+docker run -t -i --name apigateway lapax/apiaxle /bin/bash
+# once in the shell run
+supervisord
+```
 
 which will start the redis service and the api-proxy service and get you back to the command line.
 
