@@ -26,5 +26,5 @@ supervisord
 
 which will start the redis service and the api-proxy service and get you back to the command line.
 
-
+To quickly test if the supervisord runs the services, you can always run superisord with a -n flag which will run it in foreground mode 
  
