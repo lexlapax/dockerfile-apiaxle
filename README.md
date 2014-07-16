@@ -13,4 +13,4 @@ run with
 
 you should be able to login via ssh using root and the password in the dockerfile
 
-If running docker in an SELinux enabled system, logging into sshd will be denied by SELinux - for now, disabling selinux will work, putting it in permissive mode will not .. 
+If running docker in an SELinux enabled system, logging into sshd will be denied by SELinux - for now, disabling selinux will work, putting it in permissive mode will not .. see https://bugzilla.redhat.com/show_bug.cgi?id=1085081 
