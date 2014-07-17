@@ -28,6 +28,10 @@ which will start the redis service and the api-proxy service and get you back to
 
 To quickly test if the supervisord runs the services, you can always run superisord with a -n flag which will run it in foreground mode 
 
+Once supervisord and the related services are running, you can detach from the container by issuing a ^p^q which will detach the tty from the container.
+
+You can reattach to the container again with docker attach 'container id or name'
+
 
 Once logged in and the services are started, you can start playing around with it as documented by the apiaxle folks at http://apiaxle.com/docs/try-it-now/ 
 
