@@ -27,4 +27,9 @@ supervisord
 which will start the redis service and the api-proxy service and get you back to the command line.
 
 To quickly test if the supervisord runs the services, you can always run superisord with a -n flag which will run it in foreground mode 
- 
+
+
+Once logged in and the services are started, you can start playing around with it as documented by the apiaxle folks at http://apiaxle.com/docs/try-it-now/ 
+
+
+This image is for development purposes.. For production purposes, the services can be split out and a front-end load-balancer added, all running via linked docker containers.. 
