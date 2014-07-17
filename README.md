@@ -2,21 +2,34 @@ dockerfile-apiaxle
 ==================
 
 docker containerized api-axle w nodejs, redis
+
 api-axle is available at http://apiaxle.com/
 
-This image is an all in one redis, nodejs, apiaxle image, all run by supervisord. Also includes sshd run via supervisord
+This image is an all in one redis, nodejs, apiaxle image, all run by supervisord. 
 
 This images should be available at the public docker index as lapax/apiaxle.
 
-run with 
+run as daemon 
+-------------
 
-```docker run -d --name somename lapax/apiaxle```
+```docker run -d --name apigateway lapax/apiaxle```
 
-you should be able to login via ssh using root and the password in the dockerfile
+Instead of looking for alternatives, my dev containers just used sshd to provide shell access.
+ssh to a container was always a hack-job I thought, others think the same and have documented a more docker idiomatic way (see http://jpetazzo.github.io/2014/06/23/docker-ssh-considered-evil/)
 
-If running docker in an SELinux enabled system, logging into sshd will be denied by SELinux - for now, disabling selinux will work, putting it in permissive mode will not .. see https://bugzilla.redhat.com/show_bug.cgi?id=1085081 
+This container now assumes you will use nsenter .. either compile your own nsenter or use jpetazzo's docker compiled nsenter (https://github.com/jpetazzo/nsenter)
 
-If you are running in an SELINUX enabled system, one alternative is to run the container in an interactive shell and manually run supervisord (in daemon mode)
+and use nsenter to enter into the container 
+
+```shell
+# run on docker host
+PID=$(docker inspect --format {{.State.Pid}} apigateway)
+# use the pid to enter the namespace
+sudo nsenter --target $PID --mount --uts --ipc --net --pid
+```
+
+run interactively 
+-----------------
 
 ```shell
 docker run -t -i --name apigateway lapax/apiaxle /bin/bash
@@ -33,7 +46,10 @@ Once supervisord and the related services are running, you can detach from the c
 You can reattach to the container again with docker attach 'container id or name'
 
 
-Once logged in and the services are started, you can start playing around with it as documented by the apiaxle folks at http://apiaxle.com/docs/try-it-now/ 
+misc
+----
+Once logged in and the services are started, you can start playing around with it as documented by the apiaxle folks at http://apiaxle.com/docs/try-it-now/
 
+Try  the apiaxle command
 
 This image is for development purposes.. For production purposes, the services can be split out and a front-end load-balancer added, all running via linked docker containers.. 
